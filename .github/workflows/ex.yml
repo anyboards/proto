@@ -1,11 +1,8 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Example
+name: Proto Example
 
 # Controls when the workflow will run
 on:
   
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
   # pull_request:
@@ -14,15 +11,24 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       # - uses: actions/checkout@v3
 
-      - name: Example
+      - name: Proto Example
         run: echo "Proto Example"
+      
+      - name: Build API
+        uses: convictional/trigger-workflow-and-wait@v1.6.1
+        with:
+          workflow_file_name: ex.yml
+          owner: anyboards
+          repo: api
+          ref: main
+          github_token: ${{ secrets.AUTH_TOKEN }}
+          
 
       # Runs a set of commands using the runners shell
       # - name: Run a multi-line script
