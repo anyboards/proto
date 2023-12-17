@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+
+package anyboards.debug;
+option go_package = "github.com/anyboards/proto/debug;debug";
+
+import "google/protobuf/empty.proto";
+
+message A {
+    int32 a = 1;
+}
+
+service Debug {
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+}
