@@ -17,3 +17,10 @@ tasks:
           protoc --proto_path=. {{.ITEM}}.proto
           --go_out={{.ITEM}} --go_opt=paths=source_relative
           --go-grpc_out={{.ITEM}} --go-grpc_opt=paths=source_relative
+  protoc-js:
+    cmds:
+      - mkdir -p ./js
+      - >- 
+        protoc --proto_path=. debug.proto
+        --js_out=import_style=commonjs,binary:./js
+        --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./js 
