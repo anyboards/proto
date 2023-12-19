@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package anyboards.debug;
+package anyboards.debug.v1;
 
 option go_package = "github.com/anyboards/api/debug;debug";
 
