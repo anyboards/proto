@@ -8,4 +8,5 @@ import "google/protobuf/empty.proto";
 
 service Debug {
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc Ping2(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }
