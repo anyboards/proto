@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package anyboards.boards.v1;
+
+option go_package = "github.com/anyboards/proto/gen/go/boards;boards";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service Boards {
+  rpc Create(google.protobuf.Empty) returns (CreateBoardResponse) {}
+  rpc ListBoards(google.protobuf.Empty) returns (ListBoardsResponse) {}
+}
+
+message CreateBoardResponse { string id = 1; }
+
+message ListBoardResponse {
+  string id = 1;
+  string name = 2;
+  google.protobuf.Timestamp created_at = 3;
+}
+
+message ListBoardsResponse { repeated ListBoardResponse boards = 1; }
