@@ -22,14 +22,16 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	Boards_Create_FullMethodName     = "/anyboards.boards.v1.Boards/Create"
 	Boards_ListBoards_FullMethodName = "/anyboards.boards.v1.Boards/ListBoards"
+	Boards_GetBoard_FullMethodName   = "/anyboards.boards.v1.Boards/GetBoard"
 )
 
 // BoardsClient is the client API for Boards service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BoardsClient interface {
-	Create(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CreateBoardResponse, error)
-	ListBoards(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListBoardsResponse, error)
+	Create(ctx context.Context, in *CreateBoardRequest, opts ...grpc.CallOption) (*CreateBoardResponse, error)
+	ListBoards(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListBoardResponse, error)
+	GetBoard(ctx context.Context, in *GetBoardRequest, opts ...grpc.CallOption) (*GetBoardResponse, error)
 }
 
 type boardsClient struct {
@@ -40,7 +42,7 @@ func NewBoardsClient(cc grpc.ClientConnInterface) BoardsClient {
 	return &boardsClient{cc}
 }
 
-func (c *boardsClient) Create(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CreateBoardResponse, error) {
+func (c *boardsClient) Create(ctx context.Context, in *CreateBoardRequest, opts ...grpc.CallOption) (*CreateBoardResponse, error) {
 	out := new(CreateBoardResponse)
 	err := c.cc.Invoke(ctx, Boards_Create_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -49,9 +51,18 @@ func (c *boardsClient) Create(ctx context.Context, in *emptypb.Empty, opts ...gr
 	return out, nil
 }
 
-func (c *boardsClient) ListBoards(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListBoardsResponse, error) {
-	out := new(ListBoardsResponse)
+func (c *boardsClient) ListBoards(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListBoardResponse, error) {
+	out := new(ListBoardResponse)
 	err := c.cc.Invoke(ctx, Boards_ListBoards_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *boardsClient) GetBoard(ctx context.Context, in *GetBoardRequest, opts ...grpc.CallOption) (*GetBoardResponse, error) {
+	out := new(GetBoardResponse)
+	err := c.cc.Invoke(ctx, Boards_GetBoard_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -62,8 +73,9 @@ func (c *boardsClient) ListBoards(ctx context.Context, in *emptypb.Empty, opts .
 // All implementations must embed UnimplementedBoardsServer
 // for forward compatibility
 type BoardsServer interface {
-	Create(context.Context, *emptypb.Empty) (*CreateBoardResponse, error)
-	ListBoards(context.Context, *emptypb.Empty) (*ListBoardsResponse, error)
+	Create(context.Context, *CreateBoardRequest) (*CreateBoardResponse, error)
+	ListBoards(context.Context, *emptypb.Empty) (*ListBoardResponse, error)
+	GetBoard(context.Context, *GetBoardRequest) (*GetBoardResponse, error)
 	mustEmbedUnimplementedBoardsServer()
 }
 
@@ -71,11 +83,14 @@ type BoardsServer interface {
 type UnimplementedBoardsServer struct {
 }
 
-func (UnimplementedBoardsServer) Create(context.Context, *emptypb.Empty) (*CreateBoardResponse, error) {
+func (UnimplementedBoardsServer) Create(context.Context, *CreateBoardRequest) (*CreateBoardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedBoardsServer) ListBoards(context.Context, *emptypb.Empty) (*ListBoardsResponse, error) {
+func (UnimplementedBoardsServer) ListBoards(context.Context, *emptypb.Empty) (*ListBoardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBoards not implemented")
+}
+func (UnimplementedBoardsServer) GetBoard(context.Context, *GetBoardRequest) (*GetBoardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBoard not implemented")
 }
 func (UnimplementedBoardsServer) mustEmbedUnimplementedBoardsServer() {}
 
@@ -91,7 +106,7 @@ func RegisterBoardsServer(s grpc.ServiceRegistrar, srv BoardsServer) {
 }
 
 func _Boards_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(CreateBoardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -103,7 +118,7 @@ func _Boards_Create_Handler(srv interface{}, ctx context.Context, dec func(inter
 		FullMethod: Boards_Create_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BoardsServer).Create(ctx, req.(*emptypb.Empty))
+		return srv.(BoardsServer).Create(ctx, req.(*CreateBoardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -126,6 +141,24 @@ func _Boards_ListBoards_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Boards_GetBoard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBoardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BoardsServer).GetBoard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Boards_GetBoard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BoardsServer).GetBoard(ctx, req.(*GetBoardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Boards_ServiceDesc is the grpc.ServiceDesc for Boards service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -140,6 +173,10 @@ var Boards_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBoards",
 			Handler:    _Boards_ListBoards_Handler,
+		},
+		{
+			MethodName: "GetBoard",
+			Handler:    _Boards_GetBoard_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

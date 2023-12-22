@@ -10,9 +10,6 @@ tasks:
       - task: builder
 
       - task: protoc
-        vars: { PROTO_FILE: proto/debug.proto, OUT_DIR: debug }
-
-      - task: protoc
         vars: { PROTO_FILE: proto/boards.proto, OUT_DIR: boards }
       
   protoc:

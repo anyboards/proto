@@ -43,26 +43,26 @@ export class BoardsClient {
   methodDescriptorCreate = new grpcWeb.MethodDescriptor(
     '/anyboards.boards.v1.Boards/Create',
     grpcWeb.MethodType.UNARY,
-    google_protobuf_empty_pb.Empty,
+    boards_pb.CreateBoardRequest,
     boards_pb.CreateBoardResponse,
-    (request: google_protobuf_empty_pb.Empty) => {
+    (request: boards_pb.CreateBoardRequest) => {
       return request.serializeBinary();
     },
     boards_pb.CreateBoardResponse.deserializeBinary
   );
 
   create(
-    request: google_protobuf_empty_pb.Empty,
+    request: boards_pb.CreateBoardRequest,
     metadata: grpcWeb.Metadata | null): Promise<boards_pb.CreateBoardResponse>;
 
   create(
-    request: google_protobuf_empty_pb.Empty,
+    request: boards_pb.CreateBoardRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.RpcError,
                response: boards_pb.CreateBoardResponse) => void): grpcWeb.ClientReadableStream<boards_pb.CreateBoardResponse>;
 
   create(
-    request: google_protobuf_empty_pb.Empty,
+    request: boards_pb.CreateBoardRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.RpcError,
                response: boards_pb.CreateBoardResponse) => void) {
@@ -87,28 +87,28 @@ export class BoardsClient {
     '/anyboards.boards.v1.Boards/ListBoards',
     grpcWeb.MethodType.UNARY,
     google_protobuf_empty_pb.Empty,
-    boards_pb.ListBoardsResponse,
+    boards_pb.ListBoardResponse,
     (request: google_protobuf_empty_pb.Empty) => {
       return request.serializeBinary();
     },
-    boards_pb.ListBoardsResponse.deserializeBinary
+    boards_pb.ListBoardResponse.deserializeBinary
   );
 
   listBoards(
     request: google_protobuf_empty_pb.Empty,
-    metadata: grpcWeb.Metadata | null): Promise<boards_pb.ListBoardsResponse>;
+    metadata: grpcWeb.Metadata | null): Promise<boards_pb.ListBoardResponse>;
 
   listBoards(
     request: google_protobuf_empty_pb.Empty,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.RpcError,
-               response: boards_pb.ListBoardsResponse) => void): grpcWeb.ClientReadableStream<boards_pb.ListBoardsResponse>;
+               response: boards_pb.ListBoardResponse) => void): grpcWeb.ClientReadableStream<boards_pb.ListBoardResponse>;
 
   listBoards(
     request: google_protobuf_empty_pb.Empty,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.RpcError,
-               response: boards_pb.ListBoardsResponse) => void) {
+               response: boards_pb.ListBoardResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
@@ -124,6 +124,49 @@ export class BoardsClient {
     request,
     metadata || {},
     this.methodDescriptorListBoards);
+  }
+
+  methodDescriptorGetBoard = new grpcWeb.MethodDescriptor(
+    '/anyboards.boards.v1.Boards/GetBoard',
+    grpcWeb.MethodType.UNARY,
+    boards_pb.GetBoardRequest,
+    boards_pb.GetBoardResponse,
+    (request: boards_pb.GetBoardRequest) => {
+      return request.serializeBinary();
+    },
+    boards_pb.GetBoardResponse.deserializeBinary
+  );
+
+  getBoard(
+    request: boards_pb.GetBoardRequest,
+    metadata: grpcWeb.Metadata | null): Promise<boards_pb.GetBoardResponse>;
+
+  getBoard(
+    request: boards_pb.GetBoardRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.RpcError,
+               response: boards_pb.GetBoardResponse) => void): grpcWeb.ClientReadableStream<boards_pb.GetBoardResponse>;
+
+  getBoard(
+    request: boards_pb.GetBoardRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.RpcError,
+               response: boards_pb.GetBoardResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/anyboards.boards.v1.Boards/GetBoard',
+        request,
+        metadata || {},
+        this.methodDescriptorGetBoard,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/anyboards.boards.v1.Boards/GetBoard',
+    request,
+    metadata || {},
+    this.methodDescriptorGetBoard);
   }
 
 }

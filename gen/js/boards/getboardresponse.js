@@ -8,7 +8,7 @@
  */
 // GENERATED CODE -- DO NOT EDIT!
 
-goog.provide('proto.anyboards.boards.v1.CreateBoardResponse');
+goog.provide('proto.anyboards.boards.v1.GetBoardResponse');
 
 goog.require('jspb.BinaryReader');
 goog.require('jspb.BinaryWriter');
@@ -25,16 +25,16 @@ goog.require('proto.anyboards.boards.v1.Board');
  * @extends {jspb.Message}
  * @constructor
  */
-proto.anyboards.boards.v1.CreateBoardResponse = function(opt_data) {
+proto.anyboards.boards.v1.GetBoardResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.anyboards.boards.v1.CreateBoardResponse, jspb.Message);
+goog.inherits(proto.anyboards.boards.v1.GetBoardResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.anyboards.boards.v1.CreateBoardResponse.displayName = 'proto.anyboards.boards.v1.CreateBoardResponse';
+  proto.anyboards.boards.v1.GetBoardResponse.displayName = 'proto.anyboards.boards.v1.GetBoardResponse';
 }
 
 
@@ -52,8 +52,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.anyboards.boards.v1.CreateBoardResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.anyboards.boards.v1.CreateBoardResponse.toObject(opt_includeInstance, this);
+proto.anyboards.boards.v1.GetBoardResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.anyboards.boards.v1.GetBoardResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -62,11 +62,11 @@ proto.anyboards.boards.v1.CreateBoardResponse.prototype.toObject = function(opt_
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.anyboards.boards.v1.CreateBoardResponse} msg The msg instance to transform.
+ * @param {!proto.anyboards.boards.v1.GetBoardResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.anyboards.boards.v1.CreateBoardResponse.toObject = function(includeInstance, msg) {
+proto.anyboards.boards.v1.GetBoardResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     board: (f = msg.getBoard()) && proto.anyboards.boards.v1.Board.toObject(includeInstance, f)
   };
@@ -82,23 +82,23 @@ proto.anyboards.boards.v1.CreateBoardResponse.toObject = function(includeInstanc
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.anyboards.boards.v1.CreateBoardResponse}
+ * @return {!proto.anyboards.boards.v1.GetBoardResponse}
  */
-proto.anyboards.boards.v1.CreateBoardResponse.deserializeBinary = function(bytes) {
+proto.anyboards.boards.v1.GetBoardResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.anyboards.boards.v1.CreateBoardResponse;
-  return proto.anyboards.boards.v1.CreateBoardResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.anyboards.boards.v1.GetBoardResponse;
+  return proto.anyboards.boards.v1.GetBoardResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.anyboards.boards.v1.CreateBoardResponse} msg The message object to deserialize into.
+ * @param {!proto.anyboards.boards.v1.GetBoardResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.anyboards.boards.v1.CreateBoardResponse}
+ * @return {!proto.anyboards.boards.v1.GetBoardResponse}
  */
-proto.anyboards.boards.v1.CreateBoardResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.anyboards.boards.v1.GetBoardResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -123,9 +123,9 @@ proto.anyboards.boards.v1.CreateBoardResponse.deserializeBinaryFromReader = func
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.anyboards.boards.v1.CreateBoardResponse.prototype.serializeBinary = function() {
+proto.anyboards.boards.v1.GetBoardResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.anyboards.boards.v1.CreateBoardResponse.serializeBinaryToWriter(this, writer);
+  proto.anyboards.boards.v1.GetBoardResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -133,11 +133,11 @@ proto.anyboards.boards.v1.CreateBoardResponse.prototype.serializeBinary = functi
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.anyboards.boards.v1.CreateBoardResponse} message
+ * @param {!proto.anyboards.boards.v1.GetBoardResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.anyboards.boards.v1.CreateBoardResponse.serializeBinaryToWriter = function(message, writer) {
+proto.anyboards.boards.v1.GetBoardResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getBoard();
   if (f != null) {
@@ -154,7 +154,7 @@ proto.anyboards.boards.v1.CreateBoardResponse.serializeBinaryToWriter = function
  * optional Board board = 1;
  * @return {?proto.anyboards.boards.v1.Board}
  */
-proto.anyboards.boards.v1.CreateBoardResponse.prototype.getBoard = function() {
+proto.anyboards.boards.v1.GetBoardResponse.prototype.getBoard = function() {
   return /** @type{?proto.anyboards.boards.v1.Board} */ (
     jspb.Message.getWrapperField(this, proto.anyboards.boards.v1.Board, 1));
 };
@@ -162,18 +162,18 @@ proto.anyboards.boards.v1.CreateBoardResponse.prototype.getBoard = function() {
 
 /**
  * @param {?proto.anyboards.boards.v1.Board|undefined} value
- * @return {!proto.anyboards.boards.v1.CreateBoardResponse} returns this
+ * @return {!proto.anyboards.boards.v1.GetBoardResponse} returns this
 */
-proto.anyboards.boards.v1.CreateBoardResponse.prototype.setBoard = function(value) {
+proto.anyboards.boards.v1.GetBoardResponse.prototype.setBoard = function(value) {
   return jspb.Message.setWrapperField(this, 1, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.anyboards.boards.v1.CreateBoardResponse} returns this
+ * @return {!proto.anyboards.boards.v1.GetBoardResponse} returns this
  */
-proto.anyboards.boards.v1.CreateBoardResponse.prototype.clearBoard = function() {
+proto.anyboards.boards.v1.GetBoardResponse.prototype.clearBoard = function() {
   return this.setBoard(undefined);
 };
 
@@ -182,7 +182,7 @@ proto.anyboards.boards.v1.CreateBoardResponse.prototype.clearBoard = function() 
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.anyboards.boards.v1.CreateBoardResponse.prototype.hasBoard = function() {
+proto.anyboards.boards.v1.GetBoardResponse.prototype.hasBoard = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
