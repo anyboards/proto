@@ -18,8 +18,8 @@ tasks:
       GO_OUT_DIR: "{{.BUILD_VOLUME}}/gen/go/{{.OUT_DIR}}"
       JS_OUT_DIR: "{{.BUILD_VOLUME}}/gen/js/{{.OUT_DIR}}"
     cmds:
-      - mkdir -p gen/go/{{.OUT_DIR}}
-      - mkdir -p gen/js/{{.OUT_DIR}}
+      - mkdir -p gen/go/{{.OUT_DIR}} && rm -rf gen/go/{{.OUT_DIR}}/*
+      - mkdir -p gen/js/{{.OUT_DIR}} && rm -rf gen/js/{{.OUT_DIR}}/*
       - >-
         docker run --rm -it -v=.:{{.BUILD_VOLUME}} {{.BUILDER_IMAGE_TAG}}
         protoc --proto_path={{.BUILD_VOLUME}}/proto {{.BUILD_VOLUME}}/{{.PROTO_FILE}}
