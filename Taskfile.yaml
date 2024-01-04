@@ -17,8 +17,6 @@ tasks:
       #- task: protoc
       #  vars: { PROTO_FILE: proto/boards.proto, OUT_DIR: boards }
 
-      - task: godeps
-
   builder:
     internal: true
     cmds:
@@ -41,8 +39,4 @@ tasks:
         --grpc-web_out=import_style=typescript,mode=grpcwebtext:{{.JS_OUT_DIR}}
 
   godeps:
-    internal: true
-    cmd: >-
-      docker run --rm -i -v=.:{{.BUILD_VOLUME}} {{.BUILDER_IMAGE_TAG}}
-      /bin/sh -c cd {{.BUILD_VOLUME}} && go mod tidy && go get -u ./...
-
+    cmd: go mod tidy && go get -u ./...
