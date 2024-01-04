@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package anyboards.debug.v1;
+
+option go_package = "github.com/anyboards/proto/gen/go/debug;debug";
+
+import "google/protobuf/duration.proto";
+
+service Debug {
+  rpc Add(AddRequest) returns (AddResponse) {}
+  rpc Greet(GreetRequest) returns (GreetResponse) {}
+  rpc Stream(StreamRequest) returns (stream StreamResponse) {}
+  rpc TriggerStream(TriggerStreamRequest)
+      returns (stream TriggerStreamResponse) {}
+}
+
+message AddRequest {
+  int64 a = 1;
+  int64 b = 2;
+}
+message AddResponse { int64 result = 1; }
+
+message GreetRequest { string name = 1; }
+message GreetResponse { string greeting = 1; }
+
+message StreamRequest {
+  bool manual = 1;
+  google.protobuf.Duration interval = 2;
+}
+message StreamResponse { string stream_id = 1; }
+
+message TriggerStreamRequest { string stream_id = 1; }
+message TriggerStreamResponse { string status = 1; }

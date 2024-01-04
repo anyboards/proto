@@ -3,7 +3,11 @@ FROM ubuntu:latest
 RUN apt update
 RUN apt install -y software-properties-common
 RUN add-apt-repository -y ppa:longsleep/golang-backports
-RUN apt install -y wget nodejs npm golang protobuf-compiler
+RUN apt install -y wget 
+RUN apt install -y nodejs
+RUN apt install -y npm
+RUN apt install -y golang
+RUN apt install -y protobuf-compiler
 
 # Install gRPC-Web generator
 RUN npm install -g protoc-gen-grpc-web
