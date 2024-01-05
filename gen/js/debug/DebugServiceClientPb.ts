@@ -147,26 +147,26 @@ export class DebugClient {
       this.methodDescriptorStream);
   }
 
-  methodDescriptorTriggerStream = new grpcWeb.MethodDescriptor(
-    '/anyboards.debug.v1.Debug/TriggerStream',
+  methodDescriptorTriggerStreamMessage = new grpcWeb.MethodDescriptor(
+    '/anyboards.debug.v1.Debug/TriggerStreamMessage',
     grpcWeb.MethodType.SERVER_STREAMING,
-    debug_pb.TriggerStreamRequest,
-    debug_pb.TriggerStreamResponse,
-    (request: debug_pb.TriggerStreamRequest) => {
+    debug_pb.TriggerStreamMessageRequest,
+    debug_pb.TriggerStreamMessageResponse,
+    (request: debug_pb.TriggerStreamMessageRequest) => {
       return request.serializeBinary();
     },
-    debug_pb.TriggerStreamResponse.deserializeBinary
+    debug_pb.TriggerStreamMessageResponse.deserializeBinary
   );
 
-  triggerStream(
-    request: debug_pb.TriggerStreamRequest,
-    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<debug_pb.TriggerStreamResponse> {
+  triggerStreamMessage(
+    request: debug_pb.TriggerStreamMessageRequest,
+    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<debug_pb.TriggerStreamMessageResponse> {
     return this.client_.serverStreaming(
       this.hostname_ +
-        '/anyboards.debug.v1.Debug/TriggerStream',
+        '/anyboards.debug.v1.Debug/TriggerStreamMessage',
       request,
       metadata || {},
-      this.methodDescriptorTriggerStream);
+      this.methodDescriptorTriggerStreamMessage);
   }
 
 }

@@ -80,8 +80,8 @@ export namespace GreetResponse {
 }
 
 export class StreamRequest extends jspb.Message {
-  getManual(): boolean;
-  setManual(value: boolean): StreamRequest;
+  getStreamId(): string;
+  setStreamId(value: string): StreamRequest;
 
   getInterval(): google_protobuf_duration_pb.Duration | undefined;
   setInterval(value?: google_protobuf_duration_pb.Duration): StreamRequest;
@@ -98,14 +98,14 @@ export class StreamRequest extends jspb.Message {
 
 export namespace StreamRequest {
   export type AsObject = {
-    manual: boolean,
+    streamId: string,
     interval?: google_protobuf_duration_pb.Duration.AsObject,
   }
 }
 
 export class StreamResponse extends jspb.Message {
-  getStreamId(): string;
-  setStreamId(value: string): StreamResponse;
+  getMessageNum(): string;
+  setMessageNum(value: string): StreamResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): StreamResponse.AsObject;
@@ -117,41 +117,41 @@ export class StreamResponse extends jspb.Message {
 
 export namespace StreamResponse {
   export type AsObject = {
-    streamId: string,
+    messageNum: string,
   }
 }
 
-export class TriggerStreamRequest extends jspb.Message {
+export class TriggerStreamMessageRequest extends jspb.Message {
   getStreamId(): string;
-  setStreamId(value: string): TriggerStreamRequest;
+  setStreamId(value: string): TriggerStreamMessageRequest;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): TriggerStreamRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: TriggerStreamRequest): TriggerStreamRequest.AsObject;
-  static serializeBinaryToWriter(message: TriggerStreamRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): TriggerStreamRequest;
-  static deserializeBinaryFromReader(message: TriggerStreamRequest, reader: jspb.BinaryReader): TriggerStreamRequest;
+  toObject(includeInstance?: boolean): TriggerStreamMessageRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: TriggerStreamMessageRequest): TriggerStreamMessageRequest.AsObject;
+  static serializeBinaryToWriter(message: TriggerStreamMessageRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): TriggerStreamMessageRequest;
+  static deserializeBinaryFromReader(message: TriggerStreamMessageRequest, reader: jspb.BinaryReader): TriggerStreamMessageRequest;
 }
 
-export namespace TriggerStreamRequest {
+export namespace TriggerStreamMessageRequest {
   export type AsObject = {
     streamId: string,
   }
 }
 
-export class TriggerStreamResponse extends jspb.Message {
+export class TriggerStreamMessageResponse extends jspb.Message {
   getStatus(): string;
-  setStatus(value: string): TriggerStreamResponse;
+  setStatus(value: string): TriggerStreamMessageResponse;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): TriggerStreamResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: TriggerStreamResponse): TriggerStreamResponse.AsObject;
-  static serializeBinaryToWriter(message: TriggerStreamResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): TriggerStreamResponse;
-  static deserializeBinaryFromReader(message: TriggerStreamResponse, reader: jspb.BinaryReader): TriggerStreamResponse;
+  toObject(includeInstance?: boolean): TriggerStreamMessageResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: TriggerStreamMessageResponse): TriggerStreamMessageResponse.AsObject;
+  static serializeBinaryToWriter(message: TriggerStreamMessageResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): TriggerStreamMessageResponse;
+  static deserializeBinaryFromReader(message: TriggerStreamMessageResponse, reader: jspb.BinaryReader): TriggerStreamMessageResponse;
 }
 
-export namespace TriggerStreamResponse {
+export namespace TriggerStreamMessageResponse {
   export type AsObject = {
     status: string,
   }

@@ -19,10 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Debug_Add_FullMethodName           = "/anyboards.debug.v1.Debug/Add"
-	Debug_Greet_FullMethodName         = "/anyboards.debug.v1.Debug/Greet"
-	Debug_Stream_FullMethodName        = "/anyboards.debug.v1.Debug/Stream"
-	Debug_TriggerStream_FullMethodName = "/anyboards.debug.v1.Debug/TriggerStream"
+	Debug_Add_FullMethodName                  = "/anyboards.debug.v1.Debug/Add"
+	Debug_Greet_FullMethodName                = "/anyboards.debug.v1.Debug/Greet"
+	Debug_Stream_FullMethodName               = "/anyboards.debug.v1.Debug/Stream"
+	Debug_TriggerStreamMessage_FullMethodName = "/anyboards.debug.v1.Debug/TriggerStreamMessage"
 )
 
 // DebugClient is the client API for Debug service.
@@ -32,7 +32,7 @@ type DebugClient interface {
 	Add(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*AddResponse, error)
 	Greet(ctx context.Context, in *GreetRequest, opts ...grpc.CallOption) (*GreetResponse, error)
 	Stream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (Debug_StreamClient, error)
-	TriggerStream(ctx context.Context, in *TriggerStreamRequest, opts ...grpc.CallOption) (Debug_TriggerStreamClient, error)
+	TriggerStreamMessage(ctx context.Context, in *TriggerStreamMessageRequest, opts ...grpc.CallOption) (Debug_TriggerStreamMessageClient, error)
 }
 
 type debugClient struct {
@@ -93,12 +93,12 @@ func (x *debugStreamClient) Recv() (*StreamResponse, error) {
 	return m, nil
 }
 
-func (c *debugClient) TriggerStream(ctx context.Context, in *TriggerStreamRequest, opts ...grpc.CallOption) (Debug_TriggerStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Debug_ServiceDesc.Streams[1], Debug_TriggerStream_FullMethodName, opts...)
+func (c *debugClient) TriggerStreamMessage(ctx context.Context, in *TriggerStreamMessageRequest, opts ...grpc.CallOption) (Debug_TriggerStreamMessageClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Debug_ServiceDesc.Streams[1], Debug_TriggerStreamMessage_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &debugTriggerStreamClient{stream}
+	x := &debugTriggerStreamMessageClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -108,17 +108,17 @@ func (c *debugClient) TriggerStream(ctx context.Context, in *TriggerStreamReques
 	return x, nil
 }
 
-type Debug_TriggerStreamClient interface {
-	Recv() (*TriggerStreamResponse, error)
+type Debug_TriggerStreamMessageClient interface {
+	Recv() (*TriggerStreamMessageResponse, error)
 	grpc.ClientStream
 }
 
-type debugTriggerStreamClient struct {
+type debugTriggerStreamMessageClient struct {
 	grpc.ClientStream
 }
 
-func (x *debugTriggerStreamClient) Recv() (*TriggerStreamResponse, error) {
-	m := new(TriggerStreamResponse)
+func (x *debugTriggerStreamMessageClient) Recv() (*TriggerStreamMessageResponse, error) {
+	m := new(TriggerStreamMessageResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ type DebugServer interface {
 	Add(context.Context, *AddRequest) (*AddResponse, error)
 	Greet(context.Context, *GreetRequest) (*GreetResponse, error)
 	Stream(*StreamRequest, Debug_StreamServer) error
-	TriggerStream(*TriggerStreamRequest, Debug_TriggerStreamServer) error
+	TriggerStreamMessage(*TriggerStreamMessageRequest, Debug_TriggerStreamMessageServer) error
 	mustEmbedUnimplementedDebugServer()
 }
 
@@ -149,8 +149,8 @@ func (UnimplementedDebugServer) Greet(context.Context, *GreetRequest) (*GreetRes
 func (UnimplementedDebugServer) Stream(*StreamRequest, Debug_StreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method Stream not implemented")
 }
-func (UnimplementedDebugServer) TriggerStream(*TriggerStreamRequest, Debug_TriggerStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method TriggerStream not implemented")
+func (UnimplementedDebugServer) TriggerStreamMessage(*TriggerStreamMessageRequest, Debug_TriggerStreamMessageServer) error {
+	return status.Errorf(codes.Unimplemented, "method TriggerStreamMessage not implemented")
 }
 func (UnimplementedDebugServer) mustEmbedUnimplementedDebugServer() {}
 
@@ -222,24 +222,24 @@ func (x *debugStreamServer) Send(m *StreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Debug_TriggerStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(TriggerStreamRequest)
+func _Debug_TriggerStreamMessage_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(TriggerStreamMessageRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(DebugServer).TriggerStream(m, &debugTriggerStreamServer{stream})
+	return srv.(DebugServer).TriggerStreamMessage(m, &debugTriggerStreamMessageServer{stream})
 }
 
-type Debug_TriggerStreamServer interface {
-	Send(*TriggerStreamResponse) error
+type Debug_TriggerStreamMessageServer interface {
+	Send(*TriggerStreamMessageResponse) error
 	grpc.ServerStream
 }
 
-type debugTriggerStreamServer struct {
+type debugTriggerStreamMessageServer struct {
 	grpc.ServerStream
 }
 
-func (x *debugTriggerStreamServer) Send(m *TriggerStreamResponse) error {
+func (x *debugTriggerStreamMessageServer) Send(m *TriggerStreamMessageResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -266,8 +266,8 @@ var Debug_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "TriggerStream",
-			Handler:       _Debug_TriggerStream_Handler,
+			StreamName:    "TriggerStreamMessage",
+			Handler:       _Debug_TriggerStreamMessage_Handler,
 			ServerStreams: true,
 		},
 	},

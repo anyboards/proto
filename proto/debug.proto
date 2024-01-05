@@ -9,9 +9,9 @@ import "google/protobuf/duration.proto";
 service Debug {
   rpc Add(AddRequest) returns (AddResponse) {}
   rpc Greet(GreetRequest) returns (GreetResponse) {}
+
   rpc Stream(StreamRequest) returns (stream StreamResponse) {}
-  rpc TriggerStream(TriggerStreamRequest)
-      returns (stream TriggerStreamResponse) {}
+  rpc TriggerStreamMessage(TriggerStreamMessageRequest) returns (stream TriggerStreamMessageResponse) {}
 }
 
 message AddRequest {
@@ -24,10 +24,10 @@ message GreetRequest { string name = 1; }
 message GreetResponse { string greeting = 1; }
 
 message StreamRequest {
-  bool manual = 1;
+  string stream_id = 1;
   google.protobuf.Duration interval = 2;
 }
-message StreamResponse { string stream_id = 1; }
+message StreamResponse { string message_num = 1; }
 
-message TriggerStreamRequest { string stream_id = 1; }
-message TriggerStreamResponse { string status = 1; }
+message TriggerStreamMessageRequest { string stream_id = 1; }
+message TriggerStreamMessageResponse { string status = 1; }
